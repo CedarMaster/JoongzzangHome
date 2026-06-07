@@ -66,89 +66,171 @@ export default function HomePage() {
   return (
     <div>
       {/* 히어로 섹션 */}
-      <section
-        className="relative min-h-screen flex items-center justify-center overflow-hidden"
-        style={{ backgroundColor: '#1a2744' }}
-      >
-        {/* 배경 텍스처 */}
-        <div
-          className="absolute inset-0 opacity-5"
-          style={{
-            backgroundImage: `radial-gradient(circle at 20% 50%, #a8c4e0 0%, transparent 50%),
-                             radial-gradient(circle at 80% 20%, #c4dcc8 0%, transparent 50%)`,
-          }}
+      <section className="relative min-h-screen flex flex-col items-center justify-center overflow-hidden">
+
+        {/* ── 배경 이미지 (바람 부는 백향나무 숲 · komorebi) ── */}
+        {/* 직접 촬영 이미지로 교체하려면 /public/images/ 에 파일을 넣고 src 경로만 변경하세요 */}
+        {/* eslint-disable-next-line @next/next/no-img-element */}
+        <img
+          src="https://images.unsplash.com/photo-1448375240586-882707db888b?w=1920&q=85"
+          alt=""
+          aria-hidden="true"
+          className="absolute inset-0 w-full h-full object-cover"
+          style={{ objectPosition: 'center 40%' }}
         />
 
-        <div className="relative z-10 text-center px-6 max-w-4xl mx-auto">
+        {/* ── 다층 오버레이: 숲 색감 유지 + 텍스트 가독성 ── */}
+        <div
+          className="absolute inset-0"
+          style={{
+            background: `
+              linear-gradient(to bottom,
+                rgba(8, 18, 36, 0.55) 0%,
+                rgba(10, 24, 44, 0.38) 45%,
+                rgba(8, 18, 36, 0.65) 100%
+              )
+            `,
+          }}
+        />
+        {/* 하단 페이드 — 다음 섹션과 자연스럽게 연결 */}
+        <div
+          className="absolute bottom-0 left-0 right-0 h-40 pointer-events-none"
+          style={{ background: 'linear-gradient(to bottom, transparent, #faf8f5)' }}
+        />
+
+        {/* ── 메인 콘텐츠 ── */}
+        <div className="relative z-10 text-center px-6 w-full max-w-3xl mx-auto py-32">
+
+          {/* 백향나무 아이콘 (식물 모티프 SVG) */}
+          <div className="hero-fade-1 flex justify-center mb-10">
+            <svg
+              width="44" height="56" viewBox="0 0 44 56" fill="none"
+              xmlns="http://www.w3.org/2000/svg"
+              style={{ color: 'rgba(212, 196, 164, 0.75)' }}
+            >
+              {/* 수형 (樹形) — 백향나무 실루엣 */}
+              <line x1="22" y1="52" x2="22" y2="6" stroke="currentColor" strokeWidth="1.2" strokeLinecap="round" />
+              <path d="M22 14 C18 12 12 14 8 19" stroke="currentColor" strokeWidth="1.1" strokeLinecap="round" fill="none" />
+              <path d="M22 14 C26 12 32 14 36 19" stroke="currentColor" strokeWidth="1.1" strokeLinecap="round" fill="none" />
+              <path d="M22 25 C17 23 10 25 6 31" stroke="currentColor" strokeWidth="1.1" strokeLinecap="round" fill="none" />
+              <path d="M22 25 C27 23 34 25 38 31" stroke="currentColor" strokeWidth="1.1" strokeLinecap="round" fill="none" />
+              <path d="M22 37 C16 35 8 38 4 44" stroke="currentColor" strokeWidth="1.1" strokeLinecap="round" fill="none" />
+              <path d="M22 37 C28 35 36 38 40 44" stroke="currentColor" strokeWidth="1.1" strokeLinecap="round" fill="none" />
+            </svg>
+          </div>
+
           {/* 한자 로고 */}
-          <div className="mb-8">
-            <span
-              className="text-6xl md:text-8xl font-thin block mb-2"
+          <div className="hero-fade-2 mb-7">
+            <h1
+              className="font-thin leading-none"
               style={{
-                color: 'white',
-                fontFamily: 'Noto Serif KR, Georgia, serif',
-                letterSpacing: '0.3em',
-                opacity: 0.9,
+                color: '#f4ede0',
+                fontFamily: '"Noto Serif KR", "Noto Serif SC", Georgia, serif',
+                fontSize: 'clamp(3.5rem, 12vw, 7rem)',
+                letterSpacing: '0.35em',
+                textShadow: '0 2px 32px rgba(0,0,0,0.4)',
               }}
             >
               柏香齋
-            </span>
-            <span
-              className="text-sm tracking-[0.5em]"
-              style={{ color: '#a8c4e0' }}
+            </h1>
+            <p
+              className="mt-3 tracking-[0.55em] font-light"
+              style={{
+                color: 'rgba(212, 196, 164, 0.85)',
+                fontSize: '0.7rem',
+                fontFamily: '"Noto Sans KR", sans-serif',
+                letterSpacing: '0.55em',
+              }}
             >
-              백향재
-            </span>
+              B A E K H Y A N G J A E
+            </p>
+          </div>
+
+          {/* 구분선 */}
+          <div className="hero-fade-2 flex items-center justify-center gap-4 mb-8">
+            <div className="w-12 h-px" style={{ backgroundColor: 'rgba(212, 196, 164, 0.35)' }} />
+            <div className="w-1 h-1 rounded-full" style={{ backgroundColor: 'rgba(212, 196, 164, 0.45)' }} />
+            <div className="w-12 h-px" style={{ backgroundColor: 'rgba(212, 196, 164, 0.35)' }} />
           </div>
 
           {/* 메인 카피 */}
-          <h1
-            className="text-2xl md:text-4xl font-light mb-6 leading-relaxed"
-            style={{ color: 'white', fontFamily: 'Noto Serif KR, Georgia, serif', letterSpacing: '-0.01em' }}
-          >
-            천천히, 그러나 방향은 정확하게.
-          </h1>
-
-          <p
-            className="text-sm md:text-base leading-loose max-w-xl mx-auto mb-12"
-            style={{ color: '#c8c4be' }}
-          >
-            각자의 때와 방식으로 성장하는 사람들을 위한<br />
-            조용한 배움의 공간입니다.
-          </p>
-
-          {/* 캐릭터 플레이스홀더 */}
-          <div className="mb-12 flex justify-center">
-            <div
-              className="character-float w-24 h-24 rounded-full flex items-center justify-center text-4xl"
-              style={{ backgroundColor: 'rgba(168, 196, 224, 0.15)', border: '1px solid rgba(168, 196, 224, 0.3)' }}
+          <div className="hero-fade-3 mb-5">
+            <p
+              className="font-light leading-loose"
+              style={{
+                color: 'rgba(244, 237, 224, 0.95)',
+                fontFamily: '"Noto Serif KR", Georgia, serif',
+                fontSize: 'clamp(1.15rem, 3.5vw, 1.75rem)',
+                letterSpacing: '0.02em',
+                textShadow: '0 1px 12px rgba(0,0,0,0.3)',
+              }}
             >
-              ✨
-            </div>
+              천천히, 그러나 방향은 정확하게.
+            </p>
           </div>
 
-          {/* CTA 버튼들 */}
-          <div className="flex flex-col sm:flex-row gap-4 justify-center">
+          {/* 서브 카피 */}
+          <div className="hero-fade-3 mb-14">
+            <p
+              className="leading-loose"
+              style={{
+                color: 'rgba(200, 190, 175, 0.8)',
+                fontFamily: '"Noto Sans KR", sans-serif',
+                fontSize: '0.85rem',
+                letterSpacing: '0.04em',
+              }}
+            >
+              각자의 때와 방식으로 성장하는 사람들을 위한<br />
+              조용한 배움의 공간입니다.
+            </p>
+          </div>
+
+          {/* CTA 버튼 */}
+          <div className="hero-fade-4 flex flex-col sm:flex-row gap-3 justify-center items-center">
             <Link
               href="/brand"
-              className="inline-flex items-center gap-2 px-8 py-3 rounded text-sm transition-all duration-200"
+              className="group inline-flex items-center gap-2.5 px-8 py-3.5 rounded-full text-sm font-light transition-all duration-300"
               style={{
-                backgroundColor: 'white',
-                color: '#1a2744',
-                letterSpacing: '0.05em',
+                backgroundColor: 'rgba(244, 237, 224, 0.15)',
+                border: '1px solid rgba(244, 237, 224, 0.5)',
+                color: '#f4ede0',
+                letterSpacing: '0.08em',
+                backdropFilter: 'blur(8px)',
+                WebkitBackdropFilter: 'blur(8px)',
+              }}
+              onMouseEnter={e => {
+                const el = e.currentTarget
+                el.style.backgroundColor = 'rgba(244, 237, 224, 0.25)'
+                el.style.borderColor = 'rgba(244, 237, 224, 0.7)'
+              }}
+              onMouseLeave={e => {
+                const el = e.currentTarget
+                el.style.backgroundColor = 'rgba(244, 237, 224, 0.15)'
+                el.style.borderColor = 'rgba(244, 237, 224, 0.5)'
               }}
             >
               백향재 알아보기
-              <ArrowRight size={15} />
+              <ArrowRight size={14} className="transition-transform duration-300 group-hover:translate-x-0.5" />
             </Link>
+
             <Link
               href="/learn"
-              className="inline-flex items-center gap-2 px-8 py-3 rounded text-sm transition-all duration-200"
+              className="inline-flex items-center gap-2 px-8 py-3.5 rounded-full text-sm font-light transition-all duration-300"
               style={{
                 backgroundColor: 'transparent',
-                border: '1.5px solid rgba(168, 196, 224, 0.6)',
-                color: '#a8c4e0',
-                letterSpacing: '0.05em',
+                border: '1px solid rgba(200, 190, 175, 0.35)',
+                color: 'rgba(200, 190, 175, 0.75)',
+                letterSpacing: '0.08em',
+              }}
+              onMouseEnter={e => {
+                const el = e.currentTarget
+                el.style.borderColor = 'rgba(200, 190, 175, 0.6)'
+                el.style.color = 'rgba(200, 190, 175, 1)'
+              }}
+              onMouseLeave={e => {
+                const el = e.currentTarget
+                el.style.borderColor = 'rgba(200, 190, 175, 0.35)'
+                el.style.color = 'rgba(200, 190, 175, 0.75)'
               }}
             >
               프로그램 보기
@@ -157,9 +239,16 @@ export default function HomePage() {
         </div>
 
         {/* 스크롤 인디케이터 */}
-        <div className="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2" style={{ color: '#5a5550' }}>
-          <span className="text-xs tracking-widest">SCROLL</span>
-          <div className="w-px h-8" style={{ background: 'linear-gradient(to bottom, #5a5550, transparent)' }} />
+        <div className="absolute bottom-12 left-1/2 -translate-x-1/2 z-10 flex flex-col items-center gap-2">
+          <span
+            className="text-xs tracking-[0.3em]"
+            style={{ color: 'rgba(200, 190, 175, 0.5)', fontFamily: '"Noto Sans KR", sans-serif' }}
+          >
+            SCROLL
+          </span>
+          <div className="w-px h-10 overflow-hidden" style={{ backgroundColor: 'rgba(200, 190, 175, 0.15)' }}>
+            <div className="w-full h-full scroll-line" style={{ backgroundColor: 'rgba(200, 190, 175, 0.5)' }} />
+          </div>
         </div>
       </section>
 
