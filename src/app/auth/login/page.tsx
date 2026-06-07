@@ -33,8 +33,7 @@ function LoginForm() {
       setError(msg)
       setLoading(false)
     } else {
-      router.push(redirect)
-      router.refresh()
+      window.location.href = redirect
     }
   }
 

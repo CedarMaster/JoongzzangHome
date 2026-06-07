@@ -26,20 +26,8 @@ export async function proxy(request: NextRequest) {
     },
   })
 
-  // 세션 갱신 (getUser는 항상 서버에서 검증)
-  const {
-    data: { user },
-  } = await supabase.auth.getUser()
-
-  // /admin 보호 — 미인증 시 로그인으로 리다이렉트
-  if (request.nextUrl.pathname.startsWith('/admin')) {
-    if (!user) {
-      const loginUrl = request.nextUrl.clone()
-      loginUrl.pathname = '/auth/login'
-      loginUrl.searchParams.set('redirect', '/admin')
-      return NextResponse.redirect(loginUrl)
-    }
-  }
+  // 세션 쿠키 갱신만 수행 (페이지 보호는 각 클라이언트 컴포넌트에서 처리)
+  await supabase.auth.getSession()
 
   return proxyResponse
 }

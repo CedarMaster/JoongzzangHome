@@ -16,11 +16,18 @@ export default function AdminPage() {
     const supabase = createClient()
 
     const check = async () => {
-      const { data: { user } } = await supabase.auth.getUser()
+      // getUser()는 서버 검증 — 실패 시 getSession()으로 폴백
+      let user = null
+      const { data: u1 } = await supabase.auth.getUser()
+      if (u1.user) {
+        user = u1.user
+      } else {
+        const { data: { session } } = await supabase.auth.getSession()
+        user = session?.user ?? null
+      }
 
       if (!user) {
-        router.replace('/auth/login?redirect=/admin')
-        setState('redirect')
+        window.location.href = '/auth/login?redirect=/admin'
         return
       }
 
@@ -31,8 +38,7 @@ export default function AdminPage() {
         .single()
 
       if (profile?.role !== 'admin') {
-        router.replace('/')
-        setState('redirect')
+        window.location.href = '/'
         return
       }
 
