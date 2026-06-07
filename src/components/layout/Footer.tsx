@@ -20,9 +20,13 @@ export default function Footer() {
               각자의 때와 방식으로 성장하는 사람들을 위한<br />
               조용한 배움의 공간입니다.
             </p>
-            <p className="text-xs" style={{ color: '#5a5550' }}>
-              운영자: 조중현 교수
-            </p>
+            <Link
+              href="/admin"
+              className="text-xs transition-colors hover:text-white"
+              style={{ color: '#5a5550' }}
+            >
+              백향재 관리
+            </Link>
           </div>
 
           {/* 메뉴 */}
