@@ -79,6 +79,7 @@ export default function ListenPage() {
         subtitle="상황과 감정에 맞는 음악을 만나보세요."
         objectPosition="center 55%"
         minHeight="46vh"
+        bottomColor="#0f1a33"
       />
 
       {/* 카테고리 탭 */}

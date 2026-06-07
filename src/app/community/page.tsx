@@ -21,6 +21,7 @@ export default function CommunityPage() {
         subtitle="승인된 멤버들을 위한 프라이빗 공간입니다."
         objectPosition="center 45%"
         minHeight="46vh"
+        bottomColor="#f0ede8"
       />
 
       {/* 잠금 안내 */}

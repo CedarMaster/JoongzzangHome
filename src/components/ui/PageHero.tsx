@@ -8,6 +8,8 @@ interface PageHeroProps {
   subtitle?: string
   objectPosition?: string
   minHeight?: string
+  /** 히어로 바로 아래 섹션의 배경색 — 페이드가 이 색으로 녹아들도록 맞춰줍니다 */
+  bottomColor?: string
 }
 
 export default function PageHero({
@@ -18,6 +20,7 @@ export default function PageHero({
   subtitle,
   objectPosition = 'center 40%',
   minHeight = '52vh',
+  bottomColor = '#faf8f5',
 }: PageHeroProps) {
   return (
     <section
@@ -34,19 +37,32 @@ export default function PageHero({
         style={{ objectPosition }}
       />
 
-      {/* 오버레이 */}
+      {/* 메인 오버레이 — 상단→중간은 사진 색감 유지, 하단은 bottomColor로 완전히 녹아들도록 */}
       <div
         className="absolute inset-0"
         style={{
-          background:
-            'linear-gradient(to bottom, rgba(8,18,36,0.60) 0%, rgba(10,24,44,0.45) 50%, rgba(8,18,36,0.72) 100%)',
+          background: `linear-gradient(
+            to bottom,
+            rgba(8,18,36,0.58) 0%,
+            rgba(10,24,44,0.42) 42%,
+            rgba(8,18,36,0.80) 72%,
+            ${bottomColor} 100%
+          )`,
         }}
       />
 
-      {/* 하단 페이드 */}
+      {/* 하단 블렌딩 페이드 — 충분한 높이로 경계선을 완전히 없앰 */}
       <div
-        className="absolute bottom-0 left-0 right-0 h-28 pointer-events-none"
-        style={{ background: 'linear-gradient(to bottom, transparent, #faf8f5)' }}
+        className="absolute bottom-0 left-0 right-0 pointer-events-none"
+        style={{
+          height: '220px',
+          background: `linear-gradient(
+            to bottom,
+            transparent 0%,
+            ${bottomColor}cc 55%,
+            ${bottomColor} 100%
+          )`,
+        }}
       />
 
       {/* 콘텐츠 */}

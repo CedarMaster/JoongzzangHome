@@ -71,6 +71,7 @@ export default function BrandPage() {
         subtitle="천천히, 그러나 방향은 정확하게."
         objectPosition="center 35%"
         minHeight="56vh"
+        bottomColor="#faf8f5"
       />
 
       {/* 하위 메뉴 */}

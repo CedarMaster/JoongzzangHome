@@ -55,6 +55,7 @@ export default function ContactPage() {
         subtitle="강의 의뢰, 협업 제안, 모든 문의를 환영합니다."
         objectPosition="center 60%"
         minHeight="46vh"
+        bottomColor="#faf8f5"
       />
 
       {/* 문의 폼 */}

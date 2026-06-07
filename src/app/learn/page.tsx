@@ -113,6 +113,7 @@ export default function LearnPage() {
         subtitle="각자의 때에 맞는 배움의 과정을 소개합니다."
         objectPosition="center 50%"
         minHeight="46vh"
+        bottomColor="#faf8f5"
       />
 
       {/* 카테고리 필터 */}

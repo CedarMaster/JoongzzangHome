@@ -106,6 +106,7 @@ export default function ReadPage() {
         subtitle="여백 있게 읽는 시간. 글이 삶에 닿을 때."
         objectPosition="center 40%"
         minHeight="46vh"
+        bottomColor="#faf8f5"
       />
 
       {/* 카테고리 필터 */}

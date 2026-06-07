@@ -42,6 +42,7 @@ export default function ExplorePage() {
         subtitle="나를 더 깊이 이해하는 진단과 탐색의 여정"
         objectPosition="center 40%"
         minHeight="46vh"
+        bottomColor="#1a2744"
       />
 
       {/* Phase 2 예고 섹션 */}
