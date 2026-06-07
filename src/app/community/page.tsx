@@ -1,5 +1,6 @@
 import Link from 'next/link'
 import { Users, Lock, ArrowRight, FileText, Calendar, Trophy } from 'lucide-react'
+import PageHero from '@/components/ui/PageHero'
 
 const subMenus = [
   { icon: '📢', title: '백향재 소식', desc: '운영 소식과 공지', locked: true },
@@ -12,22 +13,15 @@ const subMenus = [
 export default function CommunityPage() {
   return (
     <div>
-      {/* 헤더 */}
-      <section className="py-28 px-6 text-center" style={{ backgroundColor: '#faf8f5' }}>
-        <p className="text-xs tracking-[0.4em] mb-6" style={{ color: '#8a8580' }}>COMMUNITY</p>
-        <div className="flex items-center justify-center gap-3 mb-4">
-          <Users size={26} style={{ color: '#2d3f6b' }} />
-          <h1
-            className="text-4xl font-light"
-            style={{ color: '#1a2744', fontFamily: 'Noto Serif KR, Georgia, serif' }}
-          >
-            함께하다
-          </h1>
-        </div>
-        <p className="text-sm mt-4" style={{ color: '#8a8580' }}>
-          승인된 멤버들을 위한 프라이빗 공간입니다.
-        </p>
-      </section>
+      {/* 히어로 */}
+      <PageHero
+        imageUrl="https://images.unsplash.com/photo-1529156069898-49953e39b3ac?w=1920&q=85"
+        label="COMMUNITY"
+        titleKo="함께하다"
+        subtitle="승인된 멤버들을 위한 프라이빗 공간입니다."
+        objectPosition="center 45%"
+        minHeight="46vh"
+      />
 
       {/* 잠금 안내 */}
       <section className="py-20 px-6" style={{ backgroundColor: '#f0ede8' }}>

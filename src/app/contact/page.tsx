@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import { MessageCircle, Send, CheckCircle } from 'lucide-react'
 import { createClient } from '@/lib/supabase/client'
+import PageHero from '@/components/ui/PageHero'
 
 const contactTypes = [
   { id: 'lecture', label: '강의 의뢰', emoji: '🎤', desc: '기관/단체 강의 의뢰' },
@@ -46,22 +47,15 @@ export default function ContactPage() {
 
   return (
     <div>
-      {/* 헤더 */}
-      <section className="py-28 px-6 text-center" style={{ backgroundColor: '#faf8f5' }}>
-        <p className="text-xs tracking-[0.4em] mb-6" style={{ color: '#8a8580' }}>CONTACT</p>
-        <div className="flex items-center justify-center gap-3 mb-4">
-          <MessageCircle size={26} style={{ color: '#2d3f6b' }} />
-          <h1
-            className="text-4xl font-light"
-            style={{ color: '#1a2744', fontFamily: 'Noto Serif KR, Georgia, serif' }}
-          >
-            문의하기
-          </h1>
-        </div>
-        <p className="text-sm mt-4" style={{ color: '#8a8580' }}>
-          강의 의뢰, 협업 제안, 모든 문의를 환영합니다.
-        </p>
-      </section>
+      {/* 히어로 */}
+      <PageHero
+        imageUrl="https://images.unsplash.com/photo-1448375240586-882707db888b?w=1920&q=80"
+        label="CONTACT"
+        titleKo="문의하기"
+        subtitle="강의 의뢰, 협업 제안, 모든 문의를 환영합니다."
+        objectPosition="center 60%"
+        minHeight="46vh"
+      />
 
       {/* 문의 폼 */}
       <section className="py-20 px-6" style={{ backgroundColor: '#faf8f5' }}>

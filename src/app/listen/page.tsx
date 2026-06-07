@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { Music, ExternalLink } from 'lucide-react'
+import PageHero from '@/components/ui/PageHero'
 
 const playlists = [
   {
@@ -70,25 +71,15 @@ const playlists = [
 export default function ListenPage() {
   return (
     <div>
-      {/* 헤더 */}
-      <section
-        className="py-28 px-6 text-center"
-        style={{ backgroundColor: '#0f1a33' }}
-      >
-        <p className="text-xs tracking-[0.4em] mb-6" style={{ color: '#5a6a8a' }}>LISTEN</p>
-        <div className="flex items-center justify-center gap-3 mb-4">
-          <Music size={28} style={{ color: '#a8c4e0' }} />
-          <h1
-            className="text-4xl font-light"
-            style={{ color: 'white', fontFamily: 'Noto Serif KR, Georgia, serif' }}
-          >
-            듣다
-          </h1>
-        </div>
-        <p className="text-sm mt-4" style={{ color: '#8a9ab5' }}>
-          상황과 감정에 맞는 음악을 만나보세요.
-        </p>
-      </section>
+      {/* 히어로 */}
+      <PageHero
+        imageUrl="https://images.unsplash.com/photo-1470252649378-9c29740c9fa8?w=1920&q=85"
+        label="LISTEN"
+        titleKo="듣다"
+        subtitle="상황과 감정에 맞는 음악을 만나보세요."
+        objectPosition="center 55%"
+        minHeight="46vh"
+      />
 
       {/* 카테고리 탭 */}
       <nav className="sticky top-16 z-40 py-4 px-6" style={{ backgroundColor: '#0f1a33', borderBottom: '1px solid rgba(255,255,255,0.05)' }}>

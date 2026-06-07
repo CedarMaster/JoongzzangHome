@@ -3,6 +3,7 @@
 import { useState } from 'react'
 import Link from 'next/link'
 import { Search, BookOpen, Bell, ArrowRight } from 'lucide-react'
+import PageHero from '@/components/ui/PageHero'
 
 const books = [
   {
@@ -33,22 +34,15 @@ export default function ExplorePage() {
 
   return (
     <div>
-      {/* 헤더 */}
-      <section className="py-28 px-6 text-center" style={{ backgroundColor: '#faf8f5' }}>
-        <p className="text-xs tracking-[0.4em] mb-6" style={{ color: '#8a8580' }}>EXPLORE</p>
-        <div className="flex items-center justify-center gap-3 mb-4">
-          <Search size={26} style={{ color: '#2d3f6b' }} />
-          <h1
-            className="text-4xl font-light"
-            style={{ color: '#1a2744', fontFamily: 'Noto Serif KR, Georgia, serif' }}
-          >
-            알아가다
-          </h1>
-        </div>
-        <p className="text-sm mt-4" style={{ color: '#8a8580' }}>
-          나를 더 깊이 이해하는 진단과 탐색의 여정
-        </p>
-      </section>
+      {/* 히어로 */}
+      <PageHero
+        imageUrl="https://images.unsplash.com/photo-1441974231531-c6227db76b6e?w=1920&q=85"
+        label="EXPLORE"
+        titleKo="알아가다"
+        subtitle="나를 더 깊이 이해하는 진단과 탐색의 여정"
+        objectPosition="center 40%"
+        minHeight="46vh"
+      />
 
       {/* Phase 2 예고 섹션 */}
       <section className="py-24 px-6" style={{ backgroundColor: '#1a2744' }}>

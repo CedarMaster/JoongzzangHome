@@ -3,6 +3,7 @@
 import Link from 'next/link'
 import { useState } from 'react'
 import { BookOpen, Lock } from 'lucide-react'
+import PageHero from '@/components/ui/PageHero'
 
 const categories = [
   { id: 'all', label: '전체' },
@@ -97,23 +98,15 @@ export default function ReadPage() {
 
   return (
     <div>
-      {/* 헤더 */}
-      <section className="py-28 px-6 text-center" style={{ backgroundColor: '#faf8f5' }}>
-        <p className="text-xs tracking-[0.4em] mb-6" style={{ color: '#8a8580' }}>READ</p>
-        <div className="flex items-center justify-center gap-3 mb-4">
-          <BookOpen size={24} style={{ color: '#2d3f6b' }} />
-          <h1
-            className="text-4xl font-light"
-            style={{ color: '#1a2744', fontFamily: 'Noto Serif KR, Georgia, serif' }}
-          >
-            읽다
-          </h1>
-        </div>
-        <p className="text-sm mt-4 leading-loose" style={{ color: '#8a8580' }}>
-          여백 있게 읽는 시간.<br />
-          글이 삶에 닿을 때.
-        </p>
-      </section>
+      {/* 히어로 */}
+      <PageHero
+        imageUrl="https://images.unsplash.com/photo-1476611338391-6f395a0ebc7b?w=1920&q=85"
+        label="READ"
+        titleKo="읽다"
+        subtitle="여백 있게 읽는 시간. 글이 삶에 닿을 때."
+        objectPosition="center 40%"
+        minHeight="46vh"
+      />
 
       {/* 카테고리 필터 */}
       <nav className="sticky top-16 z-40 py-4 px-6" style={{ backgroundColor: '#faf8f5', borderBottom: '1px solid #e0dbd4' }}>

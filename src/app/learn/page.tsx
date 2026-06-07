@@ -2,6 +2,7 @@
 
 import Link from 'next/link'
 import { GraduationCap, MapPin, Clock, Users, ArrowRight } from 'lucide-react'
+import PageHero from '@/components/ui/PageHero'
 
 const categories = [
   { id: 'online', label: '온라인 강의' },
@@ -104,22 +105,15 @@ const programs = [
 export default function LearnPage() {
   return (
     <div>
-      {/* 헤더 */}
-      <section className="py-28 px-6 text-center" style={{ backgroundColor: '#faf8f5' }}>
-        <p className="text-xs tracking-[0.4em] mb-6" style={{ color: '#8a8580' }}>LEARN</p>
-        <div className="flex items-center justify-center gap-3 mb-4">
-          <GraduationCap size={26} style={{ color: '#2d3f6b' }} />
-          <h1
-            className="text-4xl font-light"
-            style={{ color: '#1a2744', fontFamily: 'Noto Serif KR, Georgia, serif' }}
-          >
-            배우다
-          </h1>
-        </div>
-        <p className="text-sm mt-4" style={{ color: '#8a8580' }}>
-          각자의 때에 맞는 배움의 과정을 소개합니다.
-        </p>
-      </section>
+      {/* 히어로 */}
+      <PageHero
+        imageUrl="https://images.unsplash.com/photo-1501504905252-473c47e087f8?w=1920&q=85"
+        label="LEARN"
+        titleKo="배우다"
+        subtitle="각자의 때에 맞는 배움의 과정을 소개합니다."
+        objectPosition="center 50%"
+        minHeight="46vh"
+      />
 
       {/* 카테고리 필터 */}
       <nav className="sticky top-16 z-40 py-4 px-6" style={{ backgroundColor: '#faf8f5', borderBottom: '1px solid #e0dbd4' }}>

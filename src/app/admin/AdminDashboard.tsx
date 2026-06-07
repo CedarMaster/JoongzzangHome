@@ -5,7 +5,7 @@ import { useRouter } from 'next/navigation'
 import {
   LayoutDashboard, FileText, Users, BookOpen, Settings,
   LogOut, Music, MessageSquare, Video, ChevronDown, X, Check,
-  Trash2, Plus, RefreshCw, Eye, EyeOff,
+  Trash2, Plus, RefreshCw, Eye, EyeOff, UserCircle,
 } from 'lucide-react'
 import { createClient } from '@/lib/supabase/client'
 import type { UserRole } from '@/lib/supabase/types'
@@ -17,6 +17,7 @@ const TABS = [
   { id: 'members', label: '회원 관리', icon: Users },
   { id: 'inquiries', label: '문의', icon: MessageSquare },
   { id: 'books', label: '도서', icon: BookOpen },
+  { id: 'bio', label: '백향지기', icon: UserCircle },
   { id: 'settings', label: '설정', icon: Settings },
 ]
 
@@ -129,6 +130,7 @@ export default function AdminDashboard({ userEmail }: { userEmail: string }) {
         {activeTab === 'members' && <MembersTab />}
         {activeTab === 'inquiries' && <InquiriesTab />}
         {activeTab === 'books' && <BooksTab />}
+        {activeTab === 'bio' && <BioTab />}
         {activeTab === 'settings' && <SettingsTab />}
       </main>
     </div>
@@ -874,6 +876,112 @@ function BooksTab() {
           </div>
         ))}
       </div>
+    </div>
+  )
+}
+
+// ══════════════════════════════════════════════
+// 백향지기 소개 관리
+// ══════════════════════════════════════════════
+type BioRow = {
+  id: string
+  name: string
+  title: string | null
+  summary: string | null
+  career: Array<{ period: string; role: string; desc: string }>
+  expertise: string[]
+}
+
+function BioTab() {
+  const supabase = createClient()
+  const [bio, setBio] = useState<BioRow | null>(null)
+  const [loading, setLoading] = useState(true)
+  const [saving, setSaving] = useState(false)
+  const [saved, setSaved] = useState(false)
+  const [msg, setMsg] = useState('')
+
+  const [name, setName] = useState('')
+  const [title, setTitle] = useState('')
+  const [summary, setSummary] = useState('')
+  const [expertiseText, setExpertiseText] = useState('')
+  const [careerJson, setCareerJson] = useState('')
+
+  useEffect(() => {
+    supabase.from('bio').select('*').limit(1).single().then(({ data }) => {
+      if (data) {
+        setBio(data)
+        setName(data.name ?? '')
+        setTitle(data.title ?? '')
+        setSummary(data.summary ?? '')
+        setExpertiseText((data.expertise ?? []).join(', '))
+        setCareerJson(JSON.stringify(data.career ?? [], null, 2))
+      }
+      setLoading(false)
+    })
+  }, [supabase])
+
+  const save = async () => {
+    setSaving(true); setMsg('')
+    let parsedCareer = []
+    try { parsedCareer = JSON.parse(careerJson) } catch { setMsg('이력 JSON 형식이 잘못됐습니다.'); setSaving(false); return }
+    const expertise = expertiseText.split(',').map(s => s.trim()).filter(Boolean)
+    const payload = { name, title, summary, career: parsedCareer, expertise, updated_at: new Date().toISOString() }
+    if (bio) {
+      await supabase.from('bio').update(payload).eq('id', bio.id)
+    } else {
+      await supabase.from('bio').insert(payload)
+    }
+    setSaving(false); setSaved(true)
+    setTimeout(() => setSaved(false), 2000)
+  }
+
+  return (
+    <div>
+      <SectionTitle>백향지기 소개 관리</SectionTitle>
+      <p className="text-xs mb-6" style={{ color: '#8a8580' }}>
+        브랜드 페이지의 &apos;백향지기 이력 보기&apos; 팝업에 표시될 정보를 편집합니다.
+      </p>
+      {loading ? (
+        <p className="text-sm" style={{ color: '#c8c4be' }}>불러오는 중…</p>
+      ) : (
+        <div className="max-w-2xl space-y-5">
+          <div className="p-6 rounded-lg space-y-4" style={card}>
+            <div>
+              <Label>이름</Label>
+              <input value={name} onChange={e => setName(e.target.value)} className={input} style={inputStyle} placeholder="조중현" />
+            </div>
+            <div>
+              <Label>직함·자격</Label>
+              <input value={title} onChange={e => setTitle(e.target.value)} className={input} style={inputStyle} placeholder="교육학 박사 · 4MAT 전문 강사 · …" />
+            </div>
+            <div>
+              <Label>소개 요약</Label>
+              <textarea value={summary} onChange={e => setSummary(e.target.value)} rows={3}
+                className="w-full px-3 py-2.5 text-sm rounded outline-none resize-none"
+                style={{ ...inputStyle, lineHeight: '1.8' }} placeholder="소개 문단…" />
+            </div>
+            <div>
+              <Label>전문 분야 (쉼표로 구분)</Label>
+              <input value={expertiseText} onChange={e => setExpertiseText(e.target.value)} className={input} style={inputStyle} placeholder="4MAT 러닝 시스템, 진로 탐색 교육, 부모교육, …" />
+            </div>
+            <div>
+              <Label>이력 (JSON 배열)</Label>
+              <p className="text-xs mb-2" style={{ color: '#a8a4a0' }}>
+                형식: {'[{"period":"現재","role":"직책","desc":"설명"},…]'}
+              </p>
+              <textarea value={careerJson} onChange={e => setCareerJson(e.target.value)} rows={10}
+                className="w-full px-3 py-2.5 text-sm rounded outline-none resize-none font-mono"
+                style={{ ...inputStyle, lineHeight: '1.6', fontSize: '0.75rem' }} />
+            </div>
+            {msg && <p className="text-xs" style={{ color: '#dc2626' }}>{msg}</p>}
+            <button onClick={save} disabled={saving}
+              className="px-6 py-2.5 text-sm rounded flex items-center gap-2"
+              style={{ ...primaryBtn, opacity: saving ? 0.6 : 1 }}>
+              {saved ? <><Check size={14} /> 저장됐습니다</> : saving ? '저장 중…' : '저장'}
+            </button>
+          </div>
+        </div>
+      )}
     </div>
   )
 }
