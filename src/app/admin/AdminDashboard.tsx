@@ -87,9 +87,12 @@ export default function AdminDashboard({ userEmail }: { userEmail: string }) {
   }
 
   return (
-    <div className="min-h-screen flex" style={{ backgroundColor: '#f0ede8' }}>
+    <div
+      className="fixed inset-0 flex overflow-hidden"
+      style={{ backgroundColor: '#f0ede8', zIndex: 150 }}
+    >
       {/* 사이드바 */}
-      <aside className="w-52 flex-shrink-0 flex flex-col" style={{ backgroundColor: '#1a2744', minHeight: '100vh' }}>
+      <aside className="w-52 flex-shrink-0 flex flex-col overflow-y-auto" style={{ backgroundColor: '#1a2744' }}>
         <div className="p-5 flex-1">
           <div className="mb-7">
             <span className="text-lg font-light" style={{ color: 'white', fontFamily: 'Noto Serif KR', letterSpacing: '0.1em' }}>
@@ -123,7 +126,7 @@ export default function AdminDashboard({ userEmail }: { userEmail: string }) {
       </aside>
 
       {/* 콘텐츠 */}
-      <main className="flex-1 p-8 overflow-auto">
+      <main className="flex-1 p-8 overflow-y-auto">
         {activeTab === 'dashboard' && <DashboardTab />}
         {activeTab === 'contents' && <ContentsTab />}
         {activeTab === 'programs' && <ProgramsTab />}
